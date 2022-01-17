@@ -1,3 +1,64 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+.information{
+	height: 10vh;
+	width: 100%;
+	position: relative;
+}
+
+.current{
+	width: 25vh;
+	height: 4vh;
+	position: absolute;
+	top: 0vh;
+	left: 0vh;
+}
+
+.name{
+	width: 25vh;
+	height: 4vh;
+	position: absolute;
+	top: 0vh;
+	right: 0vh;
+}
+
+::placeholder{
+	border-color: silver;
+}
+
+
+:placeholder-shown{
+    color: blue;
+    font-size: 1em;
+    font-style: italic;
+}
+
+.column_initial_acces{
+	position: relative;
+}
+
+.text_initial_acces{
+	left: 0;
+	position: absolute;
+	top: -1.5rem;
+}
+
+.column_final_acces{
+	position: relative;
+}
+
+.text_final_acces{
+	left: 0;
+	position: absolute;
+	top: -1.5rem;
+}
+
+
+
+
+
+
+
