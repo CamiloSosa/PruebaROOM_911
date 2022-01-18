@@ -48,4 +48,22 @@ class User extends Authenticatable
     public function department(){
         return $this->belongsTo('App\Models\Department');
     }
+
+    public function permissions(){
+        return $this->belongsToMany('App\Models\Permission');
+    }
+
+    public function role(){
+        return $this->belongsTo('App\Models\Role');
+    }
+
+    public function hasPermission($name){
+        $permission = $this->permissions()->where('name', $name)->first();
+
+        if($permission){
+            return true;
+        }
+
+        return false;
+    }
 }

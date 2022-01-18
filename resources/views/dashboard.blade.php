@@ -97,6 +97,23 @@
                                         <td>
                                             {{$user->department->name}}
                                         </td>
+                                        <td>
+                                            Empty
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('/user/'.$user->id.'/edit') }}" name="button_update" class="btn btn-info">
+                                                Update
+                                            </a>
+                                            <a name="button_disable" class="btn btn-{{ $user->hasPermission('room_acces') ? 'success' : 'danger' }}">
+                                                {{ $user->hasPermission('room_acces') ? 'Disable' : 'Enable' }}
+                                            </a>
+                                            <a name="button_history" class="btn btn-warning">
+                                                History
+                                            </a>
+                                            <a name="button_delete" class="btn btn-danger">
+                                                Delete
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

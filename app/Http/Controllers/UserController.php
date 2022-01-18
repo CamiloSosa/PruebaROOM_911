@@ -1,42 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Department;
-use App\Models\User;
 use App\Models\Role;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
-class RegisteredUserController extends Controller
+class UserController extends Controller
 {
-    /**
-     * Display the registration view.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
+
+    public function create(){
+        $user = new User;
 
         $departments = Department::all();
         $roles = Role::all();
-        return view('auth.register', compact('roles', 'departments'));
-
+        return view('user.create', compact('roles', 'departments', 'user'));
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
+    public function edit($user_id){
+
+        $user = User::find($user_id);
+        $departments = Department::all();
+        $roles = Role::all();
+        return view('user.edit', compact('roles', 'departments', 'user'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -57,10 +48,7 @@ class RegisteredUserController extends Controller
             'password'      => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/dashboard');
     }
 }
+
