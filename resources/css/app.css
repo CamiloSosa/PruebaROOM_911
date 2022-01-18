@@ -36,24 +36,40 @@
     font-style: italic;
 }
 
-.column_initial_acces{
+.column_initial_access{
 	position: relative;
 }
 
-.text_initial_acces{
+.text_initial_access{
 	left: 0;
 	position: absolute;
 	top: -1.5rem;
 }
 
-.column_final_acces{
+.column_final_access{
 	position: relative;
 }
 
-.text_final_acces{
+.text_final_access{
 	left: 0;
 	position: absolute;
 	top: -1.5rem;
+}
+
+.line{
+	width: 100%;
+	border: 2px solid gray;
+}
+
+.row_new_deployee{
+	position: relative;
+	width: 100%;
+	height: 8vh;
+}
+
+.new_deployee{
+	position: absolute;
+	right: 0;
 }
 
 

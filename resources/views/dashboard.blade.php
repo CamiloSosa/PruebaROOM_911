@@ -17,7 +17,7 @@
                             Welcome: Username
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" >
                         <div class="col-md-9 column_boxes">
 
                             <div class="row row_boxes">
@@ -33,20 +33,19 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-sm-3 column_initial_acces">
-                                    <label class="text_initial_acces w-100 text-muted">
-                                        Initial acces date:
+                                <div class="col-sm-3 column_initial_access">
+                                    <label class="text_initial_access w-100 text-muted">
+                                        Initial access date:
                                     </label>
-                                    <input class="form-control" type="date" name="initial_acces">
+                                    <input class="form-control" type="date" name="initial_access">
                                 </div>
-                                <div class="col-sm-3 column_final_acces">
-                                    <label class="text_final_acces w-100 text-muted">
-                                        Final acces date:
+                                <div class="col-sm-3 column_final_access">
+                                    <label class="text_final_access w-100 text-muted">
+                                        Final access date:
                                     </label>
-                                    <input class="form-control" type="date" name="final_acces">
+                                    <input class="form-control" type="date" name="final_access">
                                 </div>
                             </div>
-                            
                         </div>
                         <div class="col-md-3 column_button_filters">
                             <div class="row row_button_filters">
@@ -62,6 +61,46 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="line my-4"></div>
+                    <div class="row_new_deployee">
+                        <div class="new_deployee mb-4">
+                            <button name="new_deployee_" class="btn btn-primary">
+                                    New deployee
+                            </button>
+                        </div>
+                    </div>
+                    <div class="container_table">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Employee ID</th>
+                                    <th scope="col">Firstname ID</th>
+                                    <th scope="col">Lastname</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">Total access</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($users as $user)
+                                    <tr>
+                                        <td>
+                                            {{$user->id}}
+                                        </td>
+                                        <td>
+                                            {{$user->firstname}}
+                                        </td>
+                                        <td>
+                                            {{$user->lastname}}
+                                        </td>
+                                        <td>
+                                            {{$user->department->name}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

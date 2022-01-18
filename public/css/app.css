@@ -618,6 +618,10 @@ select {
   margin-left: auto;
   margin-right: auto;
 }
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -626,6 +630,9 @@ select {
 }
 .mt-3 {
   margin-top: 0.75rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
 }
 .ml-1 {
   margin-left: 0.25rem;
@@ -660,9 +667,6 @@ select {
 .mt-6 {
   margin-top: 1.5rem;
 }
-.mb-4 {
-  margin-bottom: 1rem;
-}
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -674,6 +678,9 @@ select {
 }
 .inline-flex {
   display: inline-flex;
+}
+.table {
+  display: table;
 }
 .grid {
   display: grid;
@@ -1179,21 +1186,34 @@ select {
     font-size: 1em;
     font-style: italic;
 }
-.column_initial_acces{
+.column_initial_access{
 	position: relative;
 }
-.text_initial_acces{
+.text_initial_access{
 	left: 0;
 	position: absolute;
 	top: -1.5rem;
 }
-.column_final_acces{
+.column_final_access{
 	position: relative;
 }
-.text_final_acces{
+.text_final_access{
 	left: 0;
 	position: absolute;
 	top: -1.5rem;
+}
+.line{
+	width: 100%;
+	border: 2px solid gray;
+}
+.row_new_deployee{
+	position: relative;
+	width: 100%;
+	height: 8vh;
+}
+.new_deployee{
+	position: absolute;
+	right: 0;
 }
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;
