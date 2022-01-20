@@ -17,7 +17,7 @@ class AuthAdmin
     public function handle(Request $request, Closure $next)
     {
         if(\Auth::user()->role->id != 1){
-            return redirect('/login');
+            return redirect('/operator');
         }
         return $next($request);
     }

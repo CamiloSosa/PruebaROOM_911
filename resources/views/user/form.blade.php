@@ -10,21 +10,25 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ $action }}">
+        <form method="POST" action="{{ $action }}" enctype="multipart/form-data">
             @csrf
 
+            <div class="mt-4 border-bottom">
+                <label class="control-label">Upload CSV/Xlsx File</label>
+                <input type="file" name="file_uploaded" class="form-control">
+            </div>
             <!-- First Name -->
             <div class="mt-4">
                 <x-label for="firstname" :value="__('First Name')" />
 
-                <x-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname', $user->firstname)" required autofocus />
+                <x-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname', $user->firstname)" autofocus />
             </div>
 
               <!-- Last Name -->
             <div class="mt-4">
                 <x-label for="lastname" :value="__('Last Name')" />
 
-                <x-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname', $user->lastname)" required autofocus />
+                <x-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname', $user->lastname)" autofocus />
             </div>
 
             <!-- Department-->
@@ -62,12 +66,12 @@
                                 placeholder='example@gmail.com'
                                 type="email" 
                                 name="email" 
-                                :value="old('email', $user->email)" required />
+                                :value="old('email', $user->email)" />
             </div>
             <div class="mt-4">
                 <x-label for="user_pin" :value="__('PIN')" />
 
-                <input type="numeric" placeholder="Enter PIN 4 numbers" name="user_pin" value="{{ old('user_pin', $user->user_pin) }}" class="form-control">
+                <input type="number" placeholder="Enter PIN 4 numbers" name="user_pin" value="{{ old('user_pin', $user->user_pin) }}" class="form-control">
             </div>
 
             @if($text == 'Create')
@@ -79,7 +83,7 @@
 	                                placeholder='Min. 8 characters'
 	                                type="password"
 	                                name="password"
-	                                required autocomplete="new-password" />
+	                                autocomplete="new-password" />
 	            </div>
 
 	            <!-- Confirm Password -->
@@ -88,7 +92,7 @@
 
 	                <x-input id="password_confirmation" class="block mt-1 w-full"
 	                                type="password"
-	                                name="password_confirmation" required />
+	                                name="password_confirmation" />
 	            </div>
 	        @endif
             <div class="flex items-center justify-end mt-4">

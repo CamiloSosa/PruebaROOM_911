@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 Use Alert;
+use App\Imports\UsersImport;
 use App\Models\Department;
 use App\Models\Permission;
 use App\Models\Role;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class UserController extends Controller
@@ -33,27 +35,44 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'firstname'     => ['required', 'string', 'max:255'],
-            'lastname'      => ['required', 'string', 'max:255'],
-            'department_id' => ['required', 'integer'],
-            'role_id'       => ['required', 'integer'],
-            'user_pin'       => ['required', 'integer', 'max:9999'],
-            'email'         => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'      => ['required','min:8', 'confirmed', Rules\Password::defaults()],
-        ]);
 
-        $user = User::create([
-            'firstname'     => $request->firstname,
-            'lastname'      => $request->lastname,
-            'department_id' => $request->department_id,
-            'role_id'       => $request->role_id,
-            'email'         => $request->email,
-            'user_pin'         => $request->user_pin,
-            'password'      => Hash::make($request->password),
-        ]);
+        if($request->file_uploaded){
 
-        Alert::success('User created', 'The user was created successfuly');
+            $path = $request->file_uploaded->storeAs('/files/', request()->file('file_uploaded')->getClientOriginalName());
+            $import = new UsersImport();
+            $import->import($path);
+
+            if($import->failures()->count() > 0 || $import->errors()){
+                Alert::error('Error', "We couldn't import some users due validation failures");
+            }else{
+                Alert::success('Users created', 'The users were created successfuly');
+            }
+
+
+        }else{
+            $request->validate([
+                'firstname'     => ['required', 'string', 'max:255'],
+                'lastname'      => ['required', 'string', 'max:255'],
+                'department_id' => ['required', 'integer'],
+                'role_id'       => ['required', 'integer'],
+                'user_pin'      => ['required', 'integer', 'max:9999'],
+                'email'         => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password'      => ['required','min:8', 'confirmed', Rules\Password::defaults()],
+            ]);
+            $user = User::create([
+                'firstname'     => $request->firstname,
+                'lastname'      => $request->lastname,
+                'department_id' => $request->department_id,
+                'role_id'       => $request->role_id,
+                'email'         => $request->email,
+                'user_pin'         => $request->user_pin,
+                'password'      => Hash::make($request->password),
+            ]);
+            
+            Alert::success('User created', 'The user was created successfuly');
+        }
+
+
 
         return redirect('/dashboard');
     }

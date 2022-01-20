@@ -12,6 +12,11 @@ class Room911Controller extends Controller
 {
     
     public function index(){
+
+        if(Session::has('access-room')){
+            return redirect('/room911');
+        }
+
         return view('room.index');
     }
 
@@ -21,7 +26,7 @@ class Room911Controller extends Controller
         if( !$user->hasPermission('room_access')){
             $room = new Room911;
 
-            $room->user_id = $request->user_id;
+            $room->user_id = \Auth::id();
             $room->status = env('ROOM_WITHOUT_PERMISSION_ACCESS');
 
             $room->save();
@@ -33,7 +38,7 @@ class Room911Controller extends Controller
         if( $user->id != $request->user_id || $user->user_pin != $request->user_pin ){
             $room = new Room911;
 
-            $room->user_id = $request->user_id;
+            $room->user_id = \Auth::id();
             $room->status = env('ROOM_ACCESS_DENY');
 
             $room->save();

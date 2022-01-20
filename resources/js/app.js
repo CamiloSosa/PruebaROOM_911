@@ -6,7 +6,9 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
+
 $(document).ready(function(){
+	
 
 	// allow/remove user access
 	$('.button_disable').click(function(){
@@ -38,6 +40,15 @@ $(document).ready(function(){
 				}
 
 			});
+	});
+
+	// clear filter button
+	$('#clear_filter').click(function() {
+		$('#user_id').val('');
+		console.log($('#user_id'));
+		$('#department_id').val('');
+		$('#initial_access').val('');
+		$('#final_access').val('');
 	});
 
 });

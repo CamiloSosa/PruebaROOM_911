@@ -24,7 +24,7 @@
                 <div class="mt-4">
                     <x-label for="user_id" :value="__('User ID')" />
 
-                    <input id="user_id" class="form-control" type="numeric" name="user_id" :value="old('user_id')" required autofocus />
+                    <input id="user_id" class="form-control" type="number" name="user_id" :value="old('user_id')" required autofocus />
                 </div>
 
                   <!-- Last Name -->
