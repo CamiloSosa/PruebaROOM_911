@@ -22,6 +22,7 @@ class User extends Authenticatable
         'lastname',
         'department_id',
         'role_id',
+        'user_pin',
         'email',
         'password',
     ];
@@ -55,6 +56,10 @@ class User extends Authenticatable
 
     public function role(){
         return $this->belongsTo('App\Models\Role');
+    }
+
+    public function roomAccess(){
+        return $this->hasMany('App\Models\Room911');
     }
 
     public function hasPermission($name){

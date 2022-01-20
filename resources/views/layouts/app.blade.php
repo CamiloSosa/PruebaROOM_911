@@ -14,10 +14,15 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 
+        {{-- jquery --}}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <!-- Scripts -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
+        @include('sweetalert::alert')
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 

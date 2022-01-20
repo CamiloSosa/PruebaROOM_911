@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+Use Alert;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\User;
@@ -15,6 +16,12 @@ use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
+
+    public function __construct(){
+        // middleware to prevent more creating user from this route after the firstone
+        $this->middleware('validateFirstUser');
+    }
+
     /**
      * Display the registration view.
      *

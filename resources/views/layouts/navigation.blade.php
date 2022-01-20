@@ -16,6 +16,12 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('dashboard')" >
+                        {{ \Auth::user()->firstname }} - user ID :  {{ \Auth::id() }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -34,6 +40,11 @@
                     </x-slot>
 
                     <x-slot name="content">
+
+                        <x-dropdown-link :href="url('/access-room')">
+                            {{ __('Access Room 911') }}
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

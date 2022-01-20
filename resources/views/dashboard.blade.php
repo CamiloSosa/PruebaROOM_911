@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200" style="height: 35vw; text-align: center;">
                     <div class="information">
                         <div class="current">
@@ -65,12 +65,12 @@
                     <div class="line my-4"></div>
                     <div class="row_new_deployee">
                         <div class="new_deployee mb-4">
-                            <button name="new_deployee_" class="btn btn-primary">
-                                    New deployee
-                            </button>
+                            <a href="{{ url('/user') }}" name="new_employee_" class="btn btn-primary">
+                                    New Employee
+                            </a>
                         </div>
                     </div>
-                    <div class="container_table">
+                    <div class="container_table table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -98,14 +98,14 @@
                                             {{$user->department->name}}
                                         </td>
                                         <td>
-                                            Empty
+                                            {{ $user->roomAccess->count() }}
                                         </td>
                                         <td>
                                             <a href="{{ url('/user/'.$user->id.'/edit') }}" name="button_update" class="btn btn-info">
                                                 Update
                                             </a>
-                                            <a name="button_disable" class="btn btn-{{ $user->hasPermission('room_acces') ? 'success' : 'danger' }}">
-                                                {{ $user->hasPermission('room_acces') ? 'Disable' : 'Enable' }}
+                                            <a  data-url="{{ url('/user/'. $user->id . '/allow-access') }}" class=" button_disable btn btn-{{ $user->hasPermission('room_access') ? 'success' : 'danger' }}">
+                                                {{ $user->hasPermission('room_access') ? 'Disable' : 'Enable' }}
                                             </a>
                                             <a name="button_history" class="btn btn-warning">
                                                 History

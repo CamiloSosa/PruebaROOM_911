@@ -64,6 +64,11 @@
                                 name="email" 
                                 :value="old('email', $user->email)" required />
             </div>
+            <div class="mt-4">
+                <x-label for="user_pin" :value="__('PIN')" />
+
+                <input type="numeric" placeholder="Enter PIN 4 numbers" name="user_pin" value="{{ old('user_pin', $user->user_pin) }}" class="form-control">
+            </div>
 
             @if($text == 'Create')
 	            <!-- Password -->
