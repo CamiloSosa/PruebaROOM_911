@@ -27,9 +27,10 @@ Route::post('/access-room', [Room911Controller::class, 'access'])->middleware(['
 Route::get('/room-logout', [Room911Controller::class, 'getOut'])->middleware(['auth']);
 Route::get('/operator', [HomeController::class, 'operator'])->middleware(['auth']);
 
-Route::middleware(['authAdmin'])->group(function(){
+Route::middleware(['auth', 'authAdmin'])->group(function(){
     Route::get('/user/{user_id}/edit', [UserController::class, 'edit']);
     Route::post('/user/{user_id}/', [UserController::class, 'update']);
+    Route::delete('/user/{user_id}/', [UserController::class, 'destroy']);
     Route::get('/user/', [UserController::class, 'create']);
     Route::post('/user/', [UserController::class, 'store']);
     Route::post('/user/{user_id}/allow-access', [UserController::class, 'allowAccess']);

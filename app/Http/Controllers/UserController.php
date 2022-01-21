@@ -55,7 +55,7 @@ class UserController extends Controller
                 'lastname'      => ['required', 'string', 'max:255'],
                 'department_id' => ['required', 'integer'],
                 'role_id'       => ['required', 'integer'],
-                'user_pin'      => ['required', 'integer', 'max:9999'],
+                'user_pin'      => ['nullable', 'integer', 'max:9999'],
                 'email'         => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password'      => ['required','min:8', 'confirmed', Rules\Password::defaults()],
             ]);
@@ -116,6 +116,19 @@ class UserController extends Controller
 
         return response($status, 200);
 
+    }
+
+    public function destroy($user_id){
+        
+        $user = User::find($user_id);
+
+        $user->permissions()->detach();
+        foreach($user->roomAccess as $access){
+            $access->delete();
+        }
+        $user->delete();
+
+        return response('OK', 200);
     }
 }
 

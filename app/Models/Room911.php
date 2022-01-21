@@ -12,7 +12,7 @@ class Room911 extends Model
     protected $table = 'room_911';
 
     protected $fillable = ['user_id', 'status'];
-
+    protected $dates = ['created_at', 'updated_at'];
     public function user(){
         return $this->belongsTo('App\Models\User');
     }

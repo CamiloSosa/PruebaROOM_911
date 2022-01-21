@@ -12,16 +12,13 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
-    public function index(Request $request){
+    /**
+     * This function displays the dashboard
+     * */
+    public function index(Request $request){ 
         $departments = Department::all();
-        $users = User::with(['roomAccess' => function($query) use($request){
-                    if(isset($request->initial_access) && isset($request->final_access) ){
-                        $initial_access = new Carbon($request->initial_access);//->format('Y-m-d');
-                        $final_access = new Carbon($request->final_access);//->format('Y-m-d');
-                        $query->whereBetween('created_at', [$initial_access, $final_access]);
-                    }
-                }
-        ])->where('role_id', '!=', 1);
+
+        $users = User::with(['roomAccess']);
 
         if(isset($request->user_id)){
             $users->where('id', $request->user_id);
@@ -34,10 +31,16 @@ class HomeController extends Controller
         return view('dashboard', compact('departments', 'users', 'request'));
     }
 
+    /**
+     * This function displays users who are not administrators
+     * */
     public function operator(){
         return view('operator.index');
     }
 
+    /**
+     * This function exports the excel file
+     * */
     public function accessExport($user_id){
 
         return Excel::download(new AccessExport($user_id), 'access.xlsx');

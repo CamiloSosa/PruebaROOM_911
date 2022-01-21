@@ -59,7 +59,7 @@ class User extends Authenticatable
     }
 
     public function roomAccess(){
-        return $this->hasMany('App\Models\Room911');
+        return $this->hasMany('App\Models\Room911', 'user_id', 'id');
     }
 
     public function hasPermission($name){

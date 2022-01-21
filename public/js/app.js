@@ -5517,6 +5517,13 @@ $(document).ready(function () {
     $('#department_id').val('');
     $('#initial_access').val('');
     $('#final_access').val('');
+  }); // delete an user
+
+  $('.deleteUser').click(function () {
+    console.log($(this).data('url'));
+    axios["delete"]($(this).data('url')).then(function (response) {
+      location.reload();
+    });
   });
 });
 

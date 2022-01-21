@@ -13,10 +13,15 @@ class AuthAdmin
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * 
+     * 
      */
     public function handle(Request $request, Closure $next)
     {
-        if(\Auth::user()->role->id != 1){
+        /**
+         * This function protects the administrator view
+         * */
+        if(!\Auth::user() || \Auth::user()->role->id != 1){
             return redirect('/operator');
         }
         return $next($request);

@@ -10,14 +10,22 @@
             <div class="bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200" style="text-align: center;">
                     <div class="information">
-                        <div class="current">
-                            Current time
+                        <div class="current mb-2">
+                            Current time <br>
+                            @if(Session::has('access-room'))
+                                @php 
+                                    $finishTime = new \Carbon\Carbon();
+                                @endphp
+                                {{$finishTime->diffForHumans(Session::get('access-room'))}} logged in room 911
+                            @else
+                                You are out of room 911
+                            @endif
                         </div>
                         <div class="name">
                             Welcome: {{ \Auth::user()->firstname }}
                         </div>
                     </div>
-                    <form method="GET" action="{{ url('/dashboard') }}">
+                    <form method="GET" class="mt-2" action="{{ url('/dashboard') }}">
                         <div class="row" >
                             <div class="col-md-9 column_boxes">
 
@@ -34,18 +42,6 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                    <div class="col-sm-3 column_initial_access">
-                                        <label class="text_initial_access w-100 text-muted">
-                                            Initial access date:
-                                        </label>
-                                        <input class="form-control" id="initial_access" value="{{$request->initial_access}}" type="date" name="initial_access">
-                                    </div>
-                                    <div class="col-sm-3 column_final_access">
-                                        <label class="text_final_access w-100 text-muted">
-                                            Final access date:
-                                        </label>
-                                        <input class="form-control" id="final_access" value="{{$request->final_access}}" type="date" name="final_access">
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +96,7 @@
                                         <td>
                                             {{$user->department->name}}
                                         </td>
-                                        <td>
+                                        <td> 
                                             {{ $user->roomAccess->count() }}
                                         </td>
                                         <td>
@@ -113,14 +109,17 @@
                                             <a href="{{ url('/export/' . $user->id) }}" class="btn btn-warning">
                                                 History
                                             </a>
-                                            <a name="button_delete" class="btn btn-danger">
+                                            @if($user->id != auth::id())
+                                            <a data-url="{{ url('/user/' . $user->id) }}"  class="btn btn-danger deleteUser">
                                                 Delete
                                             </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $users->links() }}
                     </div>
                 </div>
             </div>
